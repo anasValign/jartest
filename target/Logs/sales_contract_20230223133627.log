@@ -1,0 +1,138 @@
+File created on 2023/06/12 14:58:15
+Inserted Record in Zoho CRM with values   {
+    "data": [
+        {
+            "Owner": {
+                "name": "Mriganka Sarma",
+                "id": "264363000000202001",
+                "email": "mriganka.sarma@nrl.co.in"
+            },
+            "Ship_to_party_SAP": "10000",
+            "$currency_symbol": "Rs.",
+            "Max_Part_Deliv": null,
+            "Part_dlv_Item": null,
+            "$field_states": null,
+            "Billing_Block":  null ,
+            "Customer_No": null,
+            "Master_Contract": null,
+            "$sharing_permission": "full_access",
+            "EAN_UPC": null,
+            "Order_Combination": null,
+            "Department": null,
+            "POD_Relevant": null,
+            "$state": "save",
+            "Means_Transport": "2",
+            "$converted": false,
+            "$process_flow": false,
+            "Deal_Name": null,
+            "Billing_Country": "IN",
+            "Customer_Reference": "test",
+            "Sales_Group":  null ,
+            "id": "264363000001738001",
+            "Route": "DEL",
+            "Pricing_Date": "20.02.2023",
+            "Status": "Created",
+            "$approval": {
+                "delegate": false,
+                "approve": false,
+                "reject": false,
+                "resubmit": false
+            },
+            "Billing_Street": "MUMBAI",
+            "MnsofTrans_Type": null,
+            "Created_Time": "2023-02-08T13:54:49+05:30",
+            "$editable": true,
+            "Billing_Code": "990980",
+            "Delivery_Port": null,
+            "Order_Reason": null,
+            "Storage_Location": null,
+            "Shipping_Customer_No": null,
+            "Shipping_City": "Golaghat",
+            "Shipping_Country": "IN",
+            "Shipping_Code":  null ,
+            "Distribution_Channel": "10",
+            "Billing_City": "MUMBAI",
+            "Total_value": 66,
+            "Created_By": {
+                "name": "Mriganka Sarma",
+                "id": "264363000000202001",
+                "email": "mriganka.sarma@nrl.co.in"
+            },
+            "Shipping_Street": null,
+            "Shipping_Plant": "3100",
+            "Valuation_Type": "OWN-BOND",
+            "Description": null,
+            "Valid_From": "08.02.2023",
+            "Shipping_State": "4",
+            "$review_process": {
+                "approve": false,
+                "reject": false,
+                "resubmit": false
+            },
+            "$canvas_id": null,
+            "Modified_By": {
+                "name": "Mriganka Sarma",
+                "id": "264363000000202001",
+                "email": "mriganka.sarma@nrl.co.in"
+            },
+            "Plant": "3100",
+            "$review": null,
+            "Sales_Organization": "1000",
+            "Valid_Till": "28.02.2023",
+            "Division": "40",
+            "Account_Name": null,
+            "$zia_visions": null,
+            "Ordered_Items": [
+                {
+            "UoM": "KG",
+            "Description": "Calcined Petroleum Coke1",
+                    "$in_merge": false,
+                    "$field_states": null,
+                    "Created_Time": "2023-02-08T13:54:49+05:30",
+                    "Parent_Id": {
+                        "name": "max life one",
+                        "id": "264363000001738001"
+                    },
+                    "Value": 32,
+                    "Sequence_Number": "1",
+                    "Product_Name": {
+                        "Product_Code": "10010",
+                        "Qty_Ordered": 0,
+                        "Layout": {
+                            "id": 264363000000000177
+                        },
+            "name": "CPC01",
+                        "Qty_in_Stock": 15,
+                        "Tax": [],
+                        "id": "264363000002456041",
+                        "Taxable": true,
+                        "Unit_Price": null,
+                        "Reorder_Level": 0
+                    },
+                    "Quantity": 0,
+                    "id": "264363000001738002",
+                    "$zia_visions": null
+                }
+            ],
+            "Shipping_Type": "DL",
+            "Sales_Office": null,
+            "Modified_Time": "2023-02-08T13:54:49+05:30",
+            "Shp_Cond": "DL",
+            "Terms_and_Conditions": null,
+            "Unloading_Point": null,
+            "Subject": "max life one",
+            "$orchestration": false,
+            "Receiving_Point": null,
+            "Mat_Freight_Group": "MSHS",
+            "$in_merge": false,
+            "SO_Number_SAP": "40043418",
+            "Billing_State": "4 & 6$$ CURRIMBHOY ROAD$$ BALLARD EST",
+            "$line_tax": [],
+            "Tag": [],
+            "$approval_state": "approved",
+            "$pathfinder": null,
+            "Spec_Processing": null
+        }
+    ]
+}
+ response from Zoho CRM {"data":[{"code":"SUCCESS","details":{"Modified_Time":"2023-06-12T14:58:16+05:30","Modified_By":{"name":"Mriganka Sarma","id":"264363000000202001"},"Created_Time":"2023-06-12T14:58:16+05:30","id":"264363000002515048","Created_By":{"name":"Mriganka Sarma","id":"264363000000202001"},"$approval_state":"approved"},"message":"record added","status":"success"}]} 
