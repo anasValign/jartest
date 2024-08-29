@@ -3,8 +3,11 @@ package com.valign.nrl;
 import com.opencsv.CSVReader;
 import com.opencsv.exceptions.CsvException;
 import org.json.simple.JSONObject;
+import org.json.simple.JSONArray;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
+//import org.json.JSONArray;
+//import org.json.JSONObject;
 
 import java.io.*;
 import java.net.HttpURLConnection;
@@ -78,12 +81,12 @@ public class SalesContractReader {
                     System.out.println("File already exists.");
                 }
 
-                //Write Content
-                FileWriter writer = new FileWriter(fileLog);
-                DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-                Date date = new Date();
-                System.out.println("line 84: " + dateFormat.format(date)); //2016/11/16 12:08:43
-                writer.write("File created on " + dateFormat.format(date) + "\n");
+                //Write Content - moved the log file to for loop
+//                FileWriter writer = new FileWriter(fileLog);
+//                DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+//                Date date = new Date();
+//                System.out.println("line 84: " + dateFormat.format(date)); //2016/11/16 12:08:43
+//                writer.write("File created on " + dateFormat.format(date) + "\n");
 
                 try (CSVReader reader = new CSVReader(new FileReader(pathFile))) {
 
@@ -303,25 +306,199 @@ public class SalesContractReader {
 
 //                        System.out.println(inputBody);
 
-                        try {
+//                        try {
+//
+//                            URL url = new URL("https://www.zohoapis.in/crm/v4/NRL_Sales_Contracts");
+//                            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+//                            conn.setDoOutput(true);
+//                            conn.setRequestMethod("POST");
+//                            conn.setRequestProperty("Content-Type", "application/json");
+//                            conn.setRequestProperty("Authorization", "Zoho-oauthtoken " + access_token);
+//
+//   //                         System.out.println("final JSON is for saleOrder Number  " + saleOrderNumber + " \n " + inputBody);
+//
+//                            OutputStream os = conn.getOutputStream();
+//                            os.write(inputBody.getBytes());
+//                            os.flush();
+//
+//                            if (conn.getResponseCode() != 201) {
+//                                dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+//                                date = new Date();
+//                                System.out.println("line 323: " + dateFormat.format(date)); //2016/11/16 12:08:43
+//                                writer.write("Insert API to Zoho failed on " + dateFormat.format(date) + "\n");
+//                                writer.write("Failed : HTTP error code : " + conn.getResponseCode());
+//
+//                                String errorMessage = "Failed : HTTP error code : " + conn.getResponseCode();
+//                                InputStream errorStream = conn.getErrorStream();
+//                                String errorResponse = "";
+//                                if (errorStream != null) {
+//                                    errorResponse = new BufferedReader(new InputStreamReader(errorStream))
+//                                            .lines().collect(Collectors.joining("\n"));
+//                                }
+//                                System.out.println(errorMessage);
+//                                System.out.println("Error response from server: " + errorResponse);
+//                                throw new RuntimeException(errorMessage + "\n" + errorResponse);
+//
+////                                throw new RuntimeException("Failed : HTTP error code : " + conn.getResponseCode() + "\n");
+//                             }
+//
+//                            BufferedReader br = new BufferedReader(new InputStreamReader((conn.getInputStream())));
+//
+//                            String output;
+//
+//                            while ((output = br.readLine()) != null) {
+//
+//                                System.out.println("Inserted Record in Zoho CRM with values   "+ inputBody + " response from Zoho CRM " + output +" \n" );
+//                                writer.write("Inserted Record in Zoho CRM with values   "+ inputBody + " response from Zoho CRM " + output +" \n" );
+//                            }
+//
+//                            conn.disconnect();
+//
+//                        } catch (MalformedURLException e) {
+//
+//                            e.printStackTrace();
+//
+//                        } catch (IOException e) {
+//
+//                            e.printStackTrace();
+//
+//                        }
+//                        catch (RuntimeException ex) {
+//                            if (ex.getMessage().contains("HTTP error code : 400")) {
+//                                // Skip or ignore the exception and continue execution
+//                                System.out.println("HTTP error 400 occurred. Skipping..." + ex.getMessage());
+//                            } else {
+//                                // Handle other types of RuntimeExceptions
+//                                // or rethrow the exception if needed
+//                                throw ex;
+//                            }
+//                        }
 
+                    // new code start
+
+//                    try {
+//                        URL url = new URL("https://www.zohoapis.in/crm/v4/NRL_Sales_Contracts");
+//                        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+//                        conn.setDoOutput(true);
+//                        conn.setRequestMethod("POST");
+//                        conn.setRequestProperty("Content-Type", "application/json");
+//                        conn.setRequestProperty("Authorization", "Zoho-oauthtoken " + access_token);
+//
+//                        // Parse inputBody to JSON object
+//                        JSONParser parser = new JSONParser();
+//                        JSONObject jsonObject = (JSONObject) parser.parse(inputBody);
+//
+//                        // Extract the data array
+//                        JSONArray dataArray = (JSONArray) jsonObject.get("data");
+//
+//                        // Batch size
+//                        int batchSize = 100;
+//                        int length = dataArray.size(); // For org.json.simple, use size() instead of length()
+//
+//                        for (int i = 0; i < length; i += batchSize) {
+//                            JSONArray batchArray = new JSONArray();
+//                            for (int j = i; j < i + batchSize && j < length; j++) {
+//                                batchArray.add(dataArray.get(j)); // Use add() for org.json.simple
+//                            }
+//
+//                            // Create a new JSON object for the batch
+//                            JSONObject batchJson = new JSONObject();
+//                            batchJson.put("data", batchArray);
+//
+//                            // Open a new connection for each batch
+//                            URL url = new URL("https://www.zohoapis.in/crm/v4/NRL_Sales_Contracts");
+//                            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+//                            conn.setDoOutput(true);
+//                            conn.setRequestMethod("POST");
+//                            conn.setRequestProperty("Content-Type", "application/json");
+//                            conn.setRequestProperty("Authorization", "Zoho-oauthtoken " + "your_access_token"); // Replace with actual token
+//
+//                            // Send the batch
+//                            OutputStream os = conn.getOutputStream();
+//                            os.write(batchJson.toString().getBytes());
+//                            os.flush();
+//                            os.close(); // Close the OutputStream
+//
+//                            // Check response
+//                            if (conn.getResponseCode() != 201) {
+//                                SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+//                                Date date = new Date();
+//                                System.out.println("line 323: " + dateFormat.format(date));
+//                                BufferedWriter writer = new BufferedWriter(new FileWriter("log.txt", true)); // Update to your actual writer
+//                                writer.write("Insert API to Zoho failed on " + dateFormat.format(date) + "\n");
+//                                writer.write("Failed : HTTP error code : " + conn.getResponseCode());
+//
+//                                String errorMessage = "Failed : HTTP error code : " + conn.getResponseCode();
+//                                InputStream errorStream = conn.getErrorStream();
+//                                String errorResponse = "";
+//                                if (errorStream != null) {
+//                                    errorResponse = new BufferedReader(new InputStreamReader(errorStream))
+//                                            .lines().collect(Collectors.joining("\n"));
+//                                }
+//                                System.out.println(errorMessage);
+//                                System.out.println("Error response from server: " + errorResponse);
+//                                throw new RuntimeException(errorMessage + "\n" + errorResponse);
+//                            }
+//
+//                            // Read the response
+//                            BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+//                            String output;
+//                            BufferedWriter writer = new BufferedWriter(new FileWriter("log.txt", true)); // Update to your actual writer
+//                            while ((output = br.readLine()) != null) {
+//                                System.out.println("Inserted Record in Zoho CRM with values " + batchJson.toString() + " response from Zoho CRM " + output + " \n");
+//                                writer.write("Inserted Record in Zoho CRM with values " + batchJson.toString() + " response from Zoho CRM " + output + " \n");
+//                            }
+//                            writer.close();
+//                            conn.disconnect(); // Disconnect after processing each batch
+//                        }
+//
+////                        conn.disconnect();
+
+                    try {
+                        // Your inputBody string (JSON content)
+//                        String inputBody = "{ \"data\": [...] }"; // Replace with your actual JSON string
+
+                        // Parse inputBody to JSON object
+                        JSONParser parser = new JSONParser();
+                        JSONObject jsonObject = (JSONObject) parser.parse(inputBody);
+
+                        // Extract the data array
+                        JSONArray dataArray = (JSONArray) jsonObject.get("data");
+
+                        // Batch size
+                        int batchSize = 100;
+                        int length = dataArray.size(); // For org.json.simple, use size() instead of length()
+
+                        for (int i = 0; i < length; i += batchSize) {
+                            JSONArray batchArray = new JSONArray();
+                            for (int j = i; j < i + batchSize && j < length; j++) {
+                                batchArray.add(dataArray.get(j)); // Use add() for org.json.simple
+                            }
+
+                            // Create a new JSON object for the batch
+                            JSONObject batchJson = new JSONObject();
+                            batchJson.put("data", batchArray);
+
+                            // Open a new connection for each batch
                             URL url = new URL("https://www.zohoapis.in/crm/v4/NRL_Sales_Contracts");
                             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                             conn.setDoOutput(true);
                             conn.setRequestMethod("POST");
                             conn.setRequestProperty("Content-Type", "application/json");
-                            conn.setRequestProperty("Authorization", "Zoho-oauthtoken " + access_token);
+                            conn.setRequestProperty("Authorization", "Zoho-oauthtoken " + access_token); // Replace with actual token
 
-   //                         System.out.println("final JSON is for saleOrder Number  " + saleOrderNumber + " \n " + inputBody);
-
+                            // Send the batch
                             OutputStream os = conn.getOutputStream();
-                            os.write(inputBody.getBytes());
+                            os.write(batchJson.toString().getBytes());
                             os.flush();
+                            os.close(); // Close the OutputStream
 
+                            // Check response
                             if (conn.getResponseCode() != 201) {
-                                dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-                                date = new Date();
-                                System.out.println("line 323: " + dateFormat.format(date)); //2016/11/16 12:08:43
+                                SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+                                Date date = new Date();
+                                System.out.println("line 323: " + dateFormat.format(date));
+                                BufferedWriter writer = new BufferedWriter(new FileWriter(fileLog, true)); // Update to your actual writer
                                 writer.write("Insert API to Zoho failed on " + dateFormat.format(date) + "\n");
                                 writer.write("Failed : HTTP error code : " + conn.getResponseCode());
 
@@ -335,45 +512,39 @@ public class SalesContractReader {
                                 System.out.println(errorMessage);
                                 System.out.println("Error response from server: " + errorResponse);
                                 throw new RuntimeException(errorMessage + "\n" + errorResponse);
+                            }
 
-//                                throw new RuntimeException("Failed : HTTP error code : " + conn.getResponseCode() + "\n");
-                             }
-
-                            BufferedReader br = new BufferedReader(new InputStreamReader((conn.getInputStream())));
-
+                            // Read the response
+                            BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
                             String output;
-
+                            BufferedWriter writer = new BufferedWriter(new FileWriter(fileLog, true)); // Update to your actual writer
                             while ((output = br.readLine()) != null) {
-
-                                System.out.println("Inserted Record in Zoho CRM with values   "+ inputBody + " response from Zoho CRM " + output +" \n" );
-                                writer.write("Inserted Record in Zoho CRM with values   "+ inputBody + " response from Zoho CRM " + output +" \n" );
+                                System.out.println("Inserted Record in Zoho CRM with values " + batchJson.toString() + " response from Zoho CRM " + output + " \n");
+                                writer.write("Inserted Record in Zoho CRM with values " + batchJson.toString() + " response from Zoho CRM " + output + " \n");
                             }
-
-                            conn.disconnect();
-
-                        } catch (MalformedURLException e) {
-
-                            e.printStackTrace();
-
-                        } catch (IOException e) {
-
-                            e.printStackTrace();
-
+                            writer.close();
+                            conn.disconnect(); // Disconnect after processing each batch
                         }
-                        catch (RuntimeException ex) {
-                            if (ex.getMessage().contains("HTTP error code : 400")) {
-                                // Skip or ignore the exception and continue execution
-                                System.out.println("HTTP error 400 occurred. Skipping..." + ex.getMessage());
-                            } else {
-                                // Handle other types of RuntimeExceptions
-                                // or rethrow the exception if needed
-                                throw ex;
-                            }
+                    } catch (MalformedURLException e) {
+                        e.printStackTrace();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    } catch (ParseException e) {
+                        throw new RuntimeException(e);
+                    } catch (RuntimeException ex) {
+                        if (ex.getMessage().contains("HTTP error code : 400")) {
+                            System.out.println("HTTP error 400 occurred. Skipping..." + ex.getMessage());
+                        } else {
+                            throw ex;
                         }
-
-                        //End Call the Zoho Insert API to insert Sales Order
                     }
-                    writer.close();
+
+
+                    // new code start
+
+                    //End Call the Zoho Insert API to insert Sales Order
+                    }
+//                    writer.close();
                     String destFile = pathFile.replace("JobQueuefiles", "CompletedinZoho");
                     moveFile(pathFile,destFile);
                 }
